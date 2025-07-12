@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ReadSystem {
+    private static ReadSystem instance;
+
     private final File topDir;
     private final HashMap<Character, char[]> hansMap;
-    public ReadSystem() {
+    private ReadSystem() {
         topDir = new File(this.getClass().getResource("UnicodeCJK-WuBi/").getFile());
         hansMap = new HashMap<>(30000);
         try (BufferedReader br = new BufferedReader(new FileReader(new File(topDir, "CJK.txt")))) {
@@ -23,8 +25,23 @@ public class ReadSystem {
         }
 
     }
-    public String getChat(char hans) throws NotHansException {
+    public static String getFullCode(char hans) throws NotHansException {
+        if(instance == null) {
+            synchronized (ReadSystem.class) {
+                if(instance == null) {
+                    instance = new ReadSystem();
+                }
+            }
+        }
         if(hans < 0x4e00 || hans > 0x9fff) throw new NotHansException(hans);
-        return String.valueOf(hansMap.get((char)hans));
+        return String.valueOf(instance.hansMap.get((char)hans));
+    }
+    public static String getFrontCode(char hans, int frontNum) {
+        String full = getFullCode(hans);
+        return full.substring(0,frontNum);
+    }
+    public static String getbackCode(char hans, int backNum) {
+        String full = getFullCode(hans);
+        return full.substring(full.length()-backNum);
     }
 }
