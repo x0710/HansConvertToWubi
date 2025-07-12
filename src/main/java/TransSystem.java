@@ -22,6 +22,12 @@ public class TransSystem {
     public HashSet<String> getDatum() {
         return new HashSet<>(datum);
     }
+
+    /**
+     * 获得一个词组的五笔编码
+     * @param s 目标词组
+     * @return 期望值
+     */
     public static String getWubiCode(String s) {
         if(s == null) return "";
         char[] sarr = s.toCharArray();
