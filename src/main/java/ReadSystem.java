@@ -15,7 +15,7 @@ public class ReadSystem {
     private final File topDir;
     private final HashMap<Character, char[]> hansMap;
     private ReadSystem() {
-        topDir = new File(this.getClass().getResource("UnicodeCJK-WuBi/").getFile();
+        topDir = new File(this.getClass().getResource("UnicodeCJK-WuBi/").getFile());
         hansMap = new HashMap<>(30000);
         try (BufferedReader br = new BufferedReader(new FileReader(new File(topDir, "CJK.txt")))) {
             for(String buf;(buf=br.readLine())!=null;) {
