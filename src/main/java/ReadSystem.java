@@ -5,12 +5,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * 读取收到的字符并将其转为五笔编码的类
  */
 public class ReadSystem {
-    private static ReadSystem instance;
+    private static final ReadSystem instance;
 
     // 存储五笔编码
     private final HashMap<Character, char[]> hansHashMap;
@@ -26,7 +27,7 @@ public class ReadSystem {
         hansHashMap = new HashMap<>(21000);
 
         // 加载对照表
-        File wubiRawcode = new File(this.getClass().getResource("UnicodeCJK-WuBi/").getFile());
+        File wubiRawcode = new File(Objects.requireNonNull(this.getClass().getResource("UnicodeCJK-WuBi/")).getFile());
         try (BufferedReader br = new BufferedReader(new FileReader(new File(wubiRawcode, "CJK.txt")))) {
             for(String buf;(buf=br.readLine())!=null;) {
                 String[] bufSplit = buf.split(",");
@@ -38,7 +39,7 @@ public class ReadSystem {
         }
 
         // 加载词频文件
-        File priorityFile = new File(this.getClass().getResource("priority.dict").getFile());
+        File priorityFile = new File(Objects.requireNonNull(this.getClass().getResource("priority.dict")).getFile());
         try (BufferedReader br1 = new BufferedReader(new FileReader(priorityFile))) {
             for(String buf;(buf=br1.readLine())!=null;) {
                 String[] bufSplit = buf.split("\\s");
@@ -60,7 +61,7 @@ public class ReadSystem {
      */
     public static String getFullCode(char hans) throws NotHansException {
         if(hans < 0x4e00 || hans > 0x9fff) throw new NotHansException(hans);
-        return String.valueOf(instance.hansHashMap.get((char)hans));
+        return String.valueOf(instance.hansHashMap.get(hans));
     }
 
     /**
