@@ -16844,7 +16844,7 @@ U+8FCA,迊,gmhp,gmhp,gmhp,1252454,12524554
 U+8FCB,迋,gpd,gpd,gpd,1121454,11214554
 U+8FCC,迌,epd,epd,epd,3511454,35114554
 U+8FCD,迍,gbnp,gbnp,gbnp,1525454,15254554
-U+8FCE,迎,pyfg,qbpk,qbpk,3552454,35524554
+U+8FCE,迎,qbpk,qbpk,qbpk,3552454,35524554
 U+8FCF,迏,dypi,dypi,dypi,1344454,13444554
 U+8FD0,运,fcpi,fcpi,fcpi,1154454,11544554
 U+8FD1,近,rpk,rpk,rpk,3312454,33124554
